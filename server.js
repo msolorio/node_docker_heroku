@@ -1,21 +1,21 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server')
-// const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
-// const prisma = new PrismaClient()
+const prisma = new PrismaClient()
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: {
-  //   prisma
-  // }
+  context: {
+    prisma
+  }
 });
 
 (async () => {
-  const { url } = await server.listen();
+  const { url } = await server.listen(4000);
 
   console.log(`Your server is running at ${url}`);
 })()
